@@ -1,0 +1,42 @@
+@{
+    ViewData["Title"] = "New Coupon";
+}
+@await Html.PartialAsync("_Nav")
+
+
+@model Coupon
+
+<div class="container mt-4">
+    <div class="card" style="border: 8px solid #ff1493;">
+        <div class="card-header" style="background-color: #ff69b4; color: white;">
+            <h1 class="display-4">Add a Coupon</h1>
+        </div>
+
+
+        <div class="card-body">
+            <form asp-action="CreateCoupon" asp-controller="Coupon" method="POST">
+
+                <div class="mb-3">
+                    <label asp-for="Code"> Coupon Code: </label>
+                    <input asp-for="Code" class="form-control">
+                    <span asp-validation-for="Code" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Website"> Website applicable on: </label>
+                    <input asp-for="Website" class="form-control">
+                    <span asp-validation-for="Website" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Description"> Description: </label>
+                    <input asp-for="Description" class="form-control">
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <button class="btn btn-primary">Add Coupon</button>
+
+            </form>
+        </div>
+    </div>
+</div>

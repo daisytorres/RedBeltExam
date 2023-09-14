@@ -1,0 +1,43 @@
+@{
+    ViewData["Title"] = "User Coupons";
+}
+
+@model User 
+@await Html.PartialAsync("_Nav")
+@{
+    int UniqueUserID = (int)Context.Session.GetInt32("UniqueUserID");
+}
+
+
+<div class="row">
+    <div class="col-6">
+        <h1>Account Information</h1>
+    </div>
+    <div class="col-6">
+        <p>Username: @Model.UserName </p>
+        <p>Email: @Model.Email </p> 
+        <p>Coupons Posted: @Model.Sales.Count</p>
+        <p># of coupons you used: @Model.ConfirmedCoupons.Count</p>
+
+
+
+
+        @* <p> Guests:</p>
+        <ul>
+            @foreach (UserRSVP rs in Model.UsersGoing)
+            {
+                <li class="list-group-item">@rs.UserConfirmed.FirstName @rs.UserConfirmed.LastName</li>
+            }
+            @if (Model.UsersGoing.Count == 0)
+            {
+                <li>No one has RSVP'd yet.</li>
+            }
+        </ul>
+        @if (Model.UserId == UniqueUserID)
+        {
+            <a asp-action="EditWedding" asp-controller="Wedding" asp-route-id="@Model.WeddingId"
+                class="btn btn-primary">Edit</a>
+        }
+    </div> *@
+
+</div>

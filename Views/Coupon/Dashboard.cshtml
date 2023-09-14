@@ -1,0 +1,50 @@
+@{
+    ViewData["Title"] = "Coupons";
+}
+
+@model List<Coupon>
+@await Html.PartialAsync("_Nav")
+@{
+    int UniqueUserID = (int)Context.Session.GetInt32("UniqueUserID");
+}
+
+<h2>Welcome, @Context.Session.GetString("LoggedUserName")! </h2>
+
+<div class="container mt-4">
+    <div class="card" style="border: 8px solid #ff1493;">
+        @foreach (Coupon c in Model)
+        {
+            bool used = c.UsersConfirmed.Any(u => u.UserId == UniqueUserID);
+            <div class="card-header" style="background-color: #ff69b4; color: white;">
+                <h1 class="display-4">@c.Code</h1>
+            </div>
+
+            <div class="card-body">
+                <p>Use On: @c.Website</p>
+                <p>@c.Description</p>
+                <p>@c.UsersConfirmed.Count people have used this</p>
+                <p>
+                    @if (c.UserId == UniqueUserID)
+                    {
+                    <p>You posted this coupon</p>
+                    }
+                    else
+                    {
+                    <form asp-action="ToggleUsed" 
+                    asp-controller="Coupon" 
+                    asp-route-id="@c.CouponId" method="POST">
+                        <button class="btn btn-info">"Use this coupon"</button>
+                    </form>
+                        @* <form asp-action="ToggleUsed"
+            asp-controller="Coupon"
+            asp-route-id="@c.CouponId"
+            method="POST">
+            <button class ="btn btn-info">@(used? "Use this coupon" : "You used this Coupon" )</button>
+            </form> *@
+                    }
+                </p>
+                <p>Posted By: @c.Couponer.UserName</p>
+            </div>
+        }
+    </div>
+</div>
